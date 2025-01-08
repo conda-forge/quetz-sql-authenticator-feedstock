@@ -6,20 +6,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/quetz-sql-authenticator-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/quetz-sql-authenticator-{{ version }}.tar.gz
   sha256: 49212cf94c664723df9c7d24b1f44e87b06daa6f1522692095f6ceef7e6f8a6d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - quetz >=0.6.1
     - sqlalchemy
     - fastapi
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/mamba-org/quetz-sql-authenticator
